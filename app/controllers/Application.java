@@ -4,7 +4,9 @@ import java.util.List;
 
 import models.Post;
 import play.Play;
+import play.cache.Cache;
 import play.data.validation.Required;
+import play.libs.Codec;
 import play.libs.Images;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -25,7 +27,8 @@ public class Application extends Controller {
 
 	public static void show(Long id) {
 		Post post = Post.findById(id);
-		render(post);
+		String randomID = Codec.UUID();
+		render(post, randomID);
 	}
 
 	public static void postComment(Long postId, @Required String author, @Required String content) {
@@ -38,8 +41,10 @@ public class Application extends Controller {
 		show(postId);
 	}
 
-	public static void captcha() {
+	public static void captcha(String id) {
 		Images.Captcha captcha = Images.captcha();
+		String code = captcha.getText("#E4EAFD");
+		Cache.set(id, code, "10mn");
 		renderBinary(captcha);
 	}
 }
