@@ -8,6 +8,9 @@ GET     /posts/{id}                             Application.show
 # Post new comment
 POST    /posts/{postId}/comments                Application.postComment
 
+# Captcha
+GET     /captcha                                Application.captcha
+
 # Home page
 GET     /                                       Application.index
 

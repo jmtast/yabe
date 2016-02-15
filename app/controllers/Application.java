@@ -5,6 +5,7 @@ import java.util.List;
 import models.Post;
 import play.Play;
 import play.data.validation.Required;
+import play.libs.Images;
 import play.mvc.Before;
 import play.mvc.Controller;
 
@@ -35,5 +36,10 @@ public class Application extends Controller {
 		post.addComment(author, content);
 		flash.success("Thanks for posting %s", author);
 		show(postId);
+	}
+
+	public static void captcha() {
+		Images.Captcha captcha = Images.captcha();
+		renderBinary(captcha);
 	}
 }
