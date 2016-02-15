@@ -5,6 +5,9 @@
 # Show posts
 GET     /posts/{id}                             Application.show
 
+# Post new comment
+POST    /posts/{postId}/comments                Application.postComment
+
 # Home page
 GET     /                                       Application.index
 

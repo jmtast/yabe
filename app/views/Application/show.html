@@ -1,6 +1,12 @@
 #{extends 'main.html' /}
 #{set title:post.title /}
 
+#{if flash.success}
+    <p class="success">${flash.success}</p>
+#{/if}
+ 
+#{display post:post, as:'full' /}
+
 <ul id="pagination">
     #{if post.previous()}
         <li id="previous">
@@ -17,8 +23,6 @@
         </li>
     #{/if}
 </ul>
-
-#{display post:post, as:'full' /}
 
 <h3>Post a comment</h3>
  
@@ -42,3 +46,18 @@
         <input type="submit" value="Submit your comment" />
     </p>
 #{/form}
+
+<script type="text/javascript" charset="utf-8">
+    $(function() {         
+        // Expose the form 
+        $('form').click(function() { 
+            $('form').expose({api: true}).load(); 
+        }); 
+        
+        // If there is an error, focus to form
+        if($('form .error').size()) {
+            $('form').expose({api: true, loadSpeed: 0}).load(); 
+            $('form input[type=text]').get(0).focus();
+        }
+    });
+</script>
