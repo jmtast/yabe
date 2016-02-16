@@ -1,7 +1,9 @@
 import java.util.List;
+import java.util.Map;
 
 import models.Comment;
 import models.Post;
+import models.Tag;
 import models.User;
 
 import org.junit.Before;
@@ -193,6 +195,10 @@ public class BasicTest extends UnitTest {
 		assertEquals(1, Post.findTaggedWith("Red", "Green").size());
 		assertEquals(0, Post.findTaggedWith("Red", "Green", "Blue").size());
 		assertEquals(0, Post.findTaggedWith("Green", "Blue").size());
+
+		// Check tag cloud count
+		List<Map> cloud = Tag.getCloud();
+		assertEquals("[{pound=1, tag=Blue}, {pound=1, tag=Green}, {pound=2, tag=Red}]", cloud.toString());
 	}
 
 }
