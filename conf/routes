@@ -3,7 +3,7 @@
 # ~~~~
 
 # Show posts
-GET     /posts/{id}                             Application.show
+GET     /posts/{<[0-9]+>id}                     Application.show
 
 # Post new comment
 POST    /posts/{postId}/comments                Application.postComment
@@ -19,6 +19,9 @@ GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
+
+# Tagged-with
+GET     /posts/{tag}                    		Application.listTagged
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
