@@ -24,7 +24,7 @@ GET     /public/                                staticDir:public
 GET     /posts/{tag}                    		Application.listTagged
 
 # Import CRUD routes
-*      /admin              module:crud
+*      	/admin            						module:crud
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
