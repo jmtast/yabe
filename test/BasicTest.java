@@ -187,6 +187,12 @@ public class BasicTest extends UnitTest {
 		assertEquals(2, Post.findTaggedWith("Red").size());
 		assertEquals(1, Post.findTaggedWith("Blue").size());
 		assertEquals(1, Post.findTaggedWith("Green").size());
+
+		// Check multiple tags on a single post
+		assertEquals(1, Post.findTaggedWith("Red", "Blue").size());
+		assertEquals(1, Post.findTaggedWith("Red", "Green").size());
+		assertEquals(0, Post.findTaggedWith("Red", "Green", "Blue").size());
+		assertEquals(0, Post.findTaggedWith("Green", "Blue").size());
 	}
 
 }
