@@ -27,6 +27,8 @@ GET     /posts/{tag}                            Application.listTagged
 *       /                                       module:secure
 
 # Administration
+GET     /admin/new                          	Admin.form
+POST    /admin/new                          	Admin.save
 GET     /admin/?                                Admin.index
 *       /admin                                  module:crud
 
