@@ -21,13 +21,14 @@ GET     /favicon.ico                            404
 GET     /public/                                staticDir:public
 
 # Tagged-with
-GET     /posts/{tag}                    		Application.listTagged
+GET     /posts/{tag}                            Application.listTagged
 
 # Import Secure routes
 *       /                                       module:secure
 
-# Import CRUD routes
-*      	/admin            						module:crud
+# Administration
+GET     /admin/?                                Admin.index
+*       /admin                                  module:crud
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
