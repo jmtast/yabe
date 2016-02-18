@@ -1,0 +1,13 @@
+views.main.tools.login = Connectez-vous pour écrire quelque chose
+post = article 
+Post = Article 
+posts = articles 
+Posts = Articles 
+comment = commentaire 
+Comment = Commentaire 
+comments = commentaires 
+Comments = Commentaires 
+user = utilisateur 
+User = Utilisateur 
+users = utilisateur 
+Users = Utilisateurs 
