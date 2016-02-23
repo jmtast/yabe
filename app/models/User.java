@@ -1,10 +1,10 @@
 package models;
 
+import org.mongodb.morphia.annotations.Entity;
+
 import play.data.validation.Email;
 import play.data.validation.Required;
 import play.modules.morphia.Model;
-
-import com.google.code.morphia.annotations.Entity;
 
 @Entity
 public class User extends Model {

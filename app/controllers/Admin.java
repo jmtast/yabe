@@ -22,7 +22,7 @@ public class Admin extends Controller {
 
 	public static void index() {
 		String user = Security.connected();
-		List<Post> posts = Post.find("author.email", user).fetch();
+		List<Post> posts = Post.find("author.email", user).asList();
 		render(posts);
 	}
 

@@ -1,5 +1,5 @@
 *{ Display a post in one of these modes: 'full', 'home' or 'teaser' }*
- 
+
 <div class="post ${_as == 'teaser' ? 'teaser' : ''}">
     <h2 class="post-title">
         <a href="@{Application.show(_post.id)}">${_post.title}</a>
@@ -9,9 +9,9 @@
         <span class="post-date">${_post.postedAt.format('dd MMM yy')}</span>
         #{if _as != 'full'}
             <span class="post-comments">
+                #{if _post.comments}
                 &nbsp;|&nbsp; ${_post.comments.size() ?: 'no'}
                 comment${_post.comments.size().pluralize()}
-                #{if _post.comments}
                     , latest by ${_post.comments[0].author}
                 #{/if}
             </span>
@@ -32,14 +32,14 @@
         </div>
     #{/if}
 </div>
- 
+
 #{if _as == 'full'}
     <div class="comments">
         <h3>
-            ${_post.comments.size() ?: 'no'} 
+            ${_post.comments.size() ?: 'no'}
             comment${_post.comments.size().pluralize()}
         </h3>
-        
+
         #{list items:_post.comments, as:'comment'}
             <div class="comment">
                 <div class="comment-metadata">
@@ -54,6 +54,6 @@
                 </div>
             </div>
         #{/list}
-        
+
     </div>
 #{/if}

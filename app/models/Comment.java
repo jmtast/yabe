@@ -5,11 +5,11 @@ import java.util.Date;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import org.mongodb.morphia.annotations.Entity;
+
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.modules.morphia.Model;
-
-import com.google.code.morphia.annotations.Entity;
 
 @Entity
 public class Comment extends Model {
