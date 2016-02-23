@@ -6,5 +6,13 @@ require:
     - play -> crud
 # Import the secure module
     - secure
-# Import morphia to use MongoDB as DB engine
-    - play -> morphia 1.2.12
+# morphia
+    - com.gelinsoft -> morphia 1.5.0a
+    - org.mongodb -> mongo-java-driver 2.13.1
+
+repositories:
+   - gelinsoft:
+      type: http
+      artifact: "http://gelinsoft.com/play/repo/[module]-[revision].zip"
+      contains:
+          - com.gelinsoft -> *
