@@ -6,3 +6,5 @@ require:
     - play -> crud
 # Import the secure module
     - secure
+# Import morphia to use MongoDB as DB engine
+    - play -> morphia 1.2.12

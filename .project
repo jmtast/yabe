@@ -23,5 +23,7 @@
 <link><name>crud</name><type>2</type><location>/home/juanma/dev/play-1.3.1/modules/crud/app</location></link>
 <link><name>conf/crud</name><type>2</type><location>/home/juanma/dev/play-1.3.1/modules/crud/conf</location></link>
 <link><name>public/crud</name><type>2</type><location>/home/juanma/dev/play-1.3.1/modules/crud/public</location></link>
+<link><name>morphia-1.5.0a</name><type>2</type><location>/home/juanma/dev/yabe/modules/morphia-1.5.0a/app</location></link>
+<link><name>conf/morphia-1.5.0a</name><type>2</type><location>/home/juanma/dev/yabe/modules/morphia-1.5.0a/conf</location></link>
 </linkedResources>
 </projectDescription>
