@@ -6,16 +6,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Reference;
 
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
-import play.db.jpa.Model;
+import play.modules.morphia.Model;
 
 @Entity
 public class Post extends Model {
@@ -31,13 +30,15 @@ public class Post extends Model {
 	public String content;
 
 	@Required
-	@ManyToOne
+	@Reference
 	public User author;
 
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	// @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	@Embedded
 	public List<Comment> comments;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	// @ManyToMany(cascade = CascadeType.PERSIST)
+	@Reference
 	public Set<Tag> tags;
 
 	public Post(User author, String title, String content) {
@@ -70,13 +71,14 @@ public class Post extends Model {
 	}
 
 	public static List<Post> findTaggedWith(String tag) {
-		return Post.find("select distinct p from Post p join p.tags as t where t.name = ?", tag).fetch();
+		return Post.find("select distinct p from Post p join p.tags as t where t.name = ?", tag).asList();
 	}
 
 	public static List<Post> findTaggedWith(String... tags) {
-		return Post
-				.find("select distinct p from Post p join p.tags as t where t.name in (:tags) group by p.id, p.author, p.title, p.content,p.postedAt having count(t.id) = :size")
-				.bind("tags", tags).bind("size", tags.length).fetch();
+		return Post.q().asList();
+		// return Post
+		// .find("select distinct p from Post p join p.tags as t where t.name in (:tags) group by p.id, p.author, p.title, p.content,p.postedAt having count(t.id) = :size")
+		// .bind("tags", tags).bind("size", tags.length).fetch();
 	}
 
 	public String toString() {

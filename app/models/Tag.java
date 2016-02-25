@@ -1,12 +1,13 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Entity;
+import org.mongodb.morphia.annotations.Entity;
 
 import play.data.validation.Required;
-import play.db.jpa.Model;
+import play.modules.morphia.Model;
 
 @Entity
 public class Tag extends Model implements Comparable<Tag> {
@@ -35,10 +36,10 @@ public class Tag extends Model implements Comparable<Tag> {
 	}
 
 	public static List<Map> getCloud() {
-		List<Map> result = Tag
-				.find("select new map(t.name as tag, count(p.id) as pound) from Post p join p.tags as t group by t.name order by t.name")
-				.fetch();
-		return result;
+		return new ArrayList<Map>();
+		// List<Map> result = Tag
+		// .find("select new map(t.name as tag, count(p.id) as pound) from Post p join p.tags as t group by t.name order by t.name")
+		// .fetch();
+		// return result;
 	}
-
 }

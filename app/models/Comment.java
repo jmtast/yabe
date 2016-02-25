@@ -3,9 +3,9 @@ package models;
 import java.util.Date;
 
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Reference;
 
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
@@ -25,15 +25,19 @@ public class Comment extends Model {
 	@MaxSize(10000)
 	public String content;
 
-	@ManyToOne
 	@Required
+	@Reference
 	public Post post;
+
+	@Required
+	public User postAuthor;
 
 	public Comment(Post post, String author, String content) {
 		this.post = post;
 		this.author = author;
 		this.content = content;
 		this.postedAt = new Date();
+		this.postAuthor = post.author;
 	}
 
 	public String toString() {
