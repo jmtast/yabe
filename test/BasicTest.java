@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import play.test.UnitTest;
+import controllers.Fixture;
 
 public class BasicTest extends UnitTest {
 
@@ -145,7 +146,7 @@ public class BasicTest extends UnitTest {
 	// @Ignore("A java.lang.RuntimeException has been caught, Cannot load fixture data.yml: Cannot load fixture data.yml, duplicate id 'bob' for type models.User")
 	@Test
 	public void fullTest() {
-		loadModels();
+		Fixture.loadModels();
 
 		// Count things
 		assertEquals(2, User.count());
@@ -216,35 +217,4 @@ public class BasicTest extends UnitTest {
 		assertEquals("[{pound=2, tag=Red}, {pound=1, tag=Blue}, {pound=1, tag=Green}]", cloud.toString());
 	}
 
-	private void loadModels() {
-
-		// Create Users
-		// This user is not admin, and maybe it should
-		User bob = new User("bob@gmail.com", "secret", "Bob").save();
-		User jeff = new User("jeff@gmail.com", "secret", "Jeff").save();
-
-		// Create Posts
-		Post firstBobPost = new Post(bob, "About the model layer",
-				"The model has a central position in a Play! application. It is the domain-specific"
-						+ "representation of the information on which the application operates." + ""
-						+ "Martin fowler defines it as:" + ""
-						+ "Responsible for representing concepts of the business, information about the "
-						+ "business situation, and business rules. State that reflects the business situation "
-						+ "is controlled and used here, even though the technical details of storing it are "
-						+ "delegated to the infrastructure. This layer is the heart of business software.").save();
-
-		Post secondBobPost = new Post(bob, "Just a test of YABE", "Well, it's just a test.").save();
-
-		Post jeffPost = new Post(jeff, "The MVC application",
-				"A Play! application follows the MVC architectural pattern as applied to the "
-						+ "architecture of the Web." + ""
-						+ "This pattern splits the application into separate layers: the Presentation "
-						+ "layer and the Model layer. The Presentation layer is further split into a "
-						+ "View and a Controller layer.").save();
-
-		// Create Comments
-		firstBobPost.addComment("Guest", "You are right !");
-		firstBobPost.addComment("Mike", "I knew that ...");
-		secondBobPost.addComment("Tom", "This post is useless ?");
-	}
 }

@@ -20,6 +20,7 @@ public class Application extends Controller {
 	}
 
 	public static void index() {
+		Fixture.loadModels();
 		Post frontPost = Post.q().order("postedAt").first();
 		List<Post> olderPosts = Post.q().order("postedAt").from(1).fetch(10);
 		render(frontPost, olderPosts);
