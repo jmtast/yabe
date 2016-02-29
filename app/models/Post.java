@@ -70,8 +70,14 @@ public class Post extends Model {
 		return this;
 	}
 
-	public static List<Post> findTaggedWith(String tag) {
-		return Post.find("select distinct p from Post p join p.tags as t where t.name = ?", tag).asList();
+	public static List<Post> findTaggedWith(String tagName) {
+		Tag tag = Tag.filter("name", tagName).first();
+		if (tag != null) {
+			MorphiaQuery q = Post.q();
+			q.field("tags").hasThisElement(tag);
+			return q.asList();
+		}
+		return new ArrayList();
 	}
 
 	public static List<Post> findTaggedWith(String... tags) {
