@@ -80,11 +80,14 @@ public class Post extends Model {
 		return new ArrayList();
 	}
 
-	public static List<Post> findTaggedWith(String... tags) {
-		return Post.q().asList();
-		// return Post
-		// .find("select distinct p from Post p join p.tags as t where t.name in (:tags) group by p.id, p.author, p.title, p.content,p.postedAt having count(t.id) = :size")
-		// .bind("tags", tags).bind("size", tags.length).fetch();
+	public static List<Post> findTaggedWith(String... tagStrings) {
+		List<Tag> tags = new ArrayList();
+		for (String tagName : tagStrings) {
+			tags.add((Tag) Tag.filter("name", tagName).first());
+		}
+		MorphiaQuery posts = Post.q();
+		posts.field("tags").hasAllOf(tags);
+		return posts.asList();
 	}
 
 	public String toString() {
