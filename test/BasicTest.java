@@ -7,7 +7,6 @@ import models.Tag;
 import models.User;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import play.test.UnitTest;
@@ -182,8 +181,9 @@ public class BasicTest extends UnitTest {
 		assertEquals(4, Comment.count());
 	}
 
-	@Ignore("A org.mongodb.morphia.query.ValidationException has been caught, The field 'select' could not be "
-			+ "found in 'models.Post' while validating - select; if you wish to continue please disable validation.")
+	// @Ignore("A org.mongodb.morphia.query.ValidationException has been caught, The field 'select' could not be "
+	// +
+	// "found in 'models.Post' while validating - select; if you wish to continue please disable validation.")
 	@Test
 	public void testTags() {
 		// Create a new user and save it
@@ -213,7 +213,7 @@ public class BasicTest extends UnitTest {
 
 		// Check tag cloud count
 		List<Map> cloud = Tag.getCloud();
-		assertEquals("[{pound=1, tag=Blue}, {pound=1, tag=Green}, {pound=2, tag=Red}]", cloud.toString());
+		assertEquals("[{pound=2, tag=Red}, {pound=1, tag=Blue}, {pound=1, tag=Green}]", cloud.toString());
 	}
 
 	private void loadModels() {
