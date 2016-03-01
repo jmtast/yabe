@@ -2,7 +2,10 @@ package controllers;
 
 import java.util.List;
 
+import models.Comment;
 import models.Post;
+import models.Tag;
+import models.User;
 import play.Play;
 import play.cache.Cache;
 import play.data.validation.Required;
@@ -20,7 +23,6 @@ public class Application extends Controller {
 	}
 
 	public static void index() {
-		Fixture.loadModels();
 		Post frontPost = Post.q().order("postedAt").first();
 		List<Post> olderPosts = Post.q().order("postedAt").from(1).fetch(10);
 		render(frontPost, olderPosts);
@@ -59,4 +61,17 @@ public class Application extends Controller {
 		List<Post> posts = Post.findTaggedWith(tag);
 		render(tag, posts);
 	}
+
+	public static void restartDB() {
+		clearDB();
+		Fixture.loadModels();
+	}
+
+	private static void clearDB() {
+		Comment.deleteAll();
+		Post.deleteAll();
+		Tag.deleteAll();
+		User.deleteAll();
+	}
+
 }
